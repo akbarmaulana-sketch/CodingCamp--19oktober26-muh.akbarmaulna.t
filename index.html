@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Life Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ── HEADER ─────────────────────────────────────────────── -->
+    <header class="top-bar">
+      <div class="top-bar__left">
+        <span class="logo">⚡ Life Dashboard</span>
+      </div>
+      <div class="top-bar__right">
+        <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-label="Toggle dark/light mode">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="dashboard">
+
+      <!-- ── GREETING + CLOCK ──────────────────────────────────── -->
+      <section class="card greeting-card" aria-label="Greeting">
+        <div class="greeting-body">
+          <div class="clock" id="clock">00:00:00</div>
+          <div class="date"  id="date">Monday, January 1, 2024</div>
+          <h1 class="greeting-text" id="greetingText">Good morning! 👋</h1>
+          <div class="greeting-name-row">
+            <span id="greetingName" class="greeting-name">Stranger</span>
+            <button id="editNameBtn" class="link-btn" aria-label="Edit your name">✏️ Edit name</button>
+          </div>
+        </div>
+
+        <!-- inline name-edit form (hidden by default) -->
+        <form id="nameForm" class="name-form hidden" aria-label="Change name">
+          <input
+            type="text"
+            id="nameInput"
+            class="input"
+            placeholder="Your name…"
+            maxlength="32"
+            autocomplete="off"
+          />
+          <button type="submit" class="btn btn--primary btn--sm">Save</button>
+          <button type="button" id="cancelNameBtn" class="btn btn--ghost btn--sm">Cancel</button>
+        </form>
+      </section>
+
+      <!-- ── FOCUS TIMER ───────────────────────────────────────── -->
+      <section class="card timer-card" aria-label="Focus timer">
+        <h2 class="card__title">🍅 Focus Timer</h2>
+
+        <div class="timer-display">
+          <svg class="timer-ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="timer-ring__bg"   cx="60" cy="60" r="52" />
+            <circle class="timer-ring__prog" cx="60" cy="60" r="52" id="timerRing" />
+          </svg>
+          <span class="timer-time" id="timerDisplay">25:00</span>
+        </div>
+
+        <div class="timer-controls">
+          <button id="timerStart"  class="btn btn--primary">▶ Start</button>
+          <button id="timerPause"  class="btn btn--secondary hidden">⏸ Pause</button>
+          <button id="timerReset"  class="btn btn--ghost">↺ Reset</button>
+        </div>
+
+        <div class="timer-settings">
+          <label for="timerMinutes" class="label">Duration (min)</label>
+          <input
+            type="number"
+            id="timerMinutes"
+            class="input input--sm"
+            min="1"
+            max="120"
+            value="25"
+          />
+          <button id="timerApply" class="btn btn--ghost btn--sm">Apply</button>
+        </div>
+
+        <p class="timer-status" id="timerStatus">Ready to focus? 🎯</p>
+      </section>
+
+      <!-- ── TO-DO LIST ────────────────────────────────────────── -->
+      <section class="card todo-card" aria-label="To-do list">
+        <h2 class="card__title">✅ To-Do List</h2>
+
+        <form id="todoForm" class="todo-form" aria-label="Add task">
+          <input
+            type="text"
+            id="todoInput"
+            class="input"
+            placeholder="Add a new task…"
+            maxlength="120"
+            autocomplete="off"
+            aria-label="New task"
+          />
+          <button type="submit" class="btn btn--primary">Add</button>
+        </form>
+
+        <div class="todo-filters" role="group" aria-label="Filter tasks">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="active">Active</button>
+          <button class="filter-btn" data-filter="done">Done</button>
+        </div>
+
+        <ul id="todoList" class="todo-list" aria-live="polite" aria-label="Task list"></ul>
+
+        <div class="todo-footer">
+          <span id="todoCount" class="todo-count">0 tasks left</span>
+          <button id="clearDone" class="link-btn link-btn--danger">Clear done</button>
+        </div>
+      </section>
+
+      <!-- ── QUICK LINKS ───────────────────────────────────────── -->
+      <section class="card links-card" aria-label="Quick links">
+        <h2 class="card__title">🔗 Quick Links</h2>
+
+        <form id="linkForm" class="link-form" aria-label="Add quick link">
+          <input
+            type="text"
+            id="linkLabel"
+            class="input"
+            placeholder="Label (e.g. GitHub)"
+            maxlength="32"
+            autocomplete="off"
+          />
+          <input
+            type="url"
+            id="linkUrl"
+            class="input"
+            placeholder="https://…"
+            autocomplete="off"
+          />
+          <button type="submit" class="btn btn--primary">Add</button>
+        </form>
+
+        <div id="linkGrid" class="link-grid" aria-live="polite" aria-label="Quick links list"></div>
+      </section>
+
+    </main>
+
+    <!-- ── TOAST ─────────────────────────────────────────────── -->
+    <div id="toast" class="toast" aria-live="assertive" aria-atomic="true" role="status"></div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
